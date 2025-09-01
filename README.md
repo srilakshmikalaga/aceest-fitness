@@ -32,6 +32,7 @@ It demonstrates modern DevOps practices including:
 ---
 
 ## Project Structure
+```
 .
 ├── .github
 │ └── workflows
@@ -48,7 +49,7 @@ It demonstrates modern DevOps practices including:
 ├── Dockerfile # Docker container configuration
 ├── README.md # Documentation (this file)
 └── requirements.txt # Python dependencies
-
+```
 ---
 
 ## Local Setup & Usage
