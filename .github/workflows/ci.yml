@@ -21,8 +21,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run pytest (host, with PYTHONPATH)
-        run: PYTHONPATH=. pytest -q
+      - name: Run pytest (host)
+        run: pytest -q
 
   docker-tests:
     runs-on: ubuntu-latest
@@ -33,5 +33,5 @@ jobs:
       - name: Build Docker image
         run: docker build -t aceest-fitness-app:ci .
 
-      - name: Run pytest inside Docker (with PYTHONPATH)
-        run: docker run --rm -e PYTHONPATH=. aceest-fitness-app:ci pytest -q
+      - name: Run pytest inside Docker
+        run: docker run --rm aceest-fitness-app:ci pytest -q

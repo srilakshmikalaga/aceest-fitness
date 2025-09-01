@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ACEest Fitness Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f9fafc; }
+        h1 { color: #2c3e50; text-align: center; }
+        form, table { margin-top: 20px; }
+        form input, form button { padding: 6px; margin: 4px; border-radius: 6px; border: 1px solid #ccc; }
+        form button { background: #3498db; color: white; border: none; cursor: pointer; }
+        form button:hover { background: #2980b9; }
+        table { border-collapse: collapse; width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        th { background: #3498db; color: white; padding: 10px; }
+        td { padding: 8px; text-align: center; border-bottom: 1px solid #ddd; }
+        .stats { margin-top: 20px; padding: 15px; background: #ecf0f1; border-radius: 8px; width: 400px; }
+    </style>
+</head>
+<body>
+    <h1>ACEest Fitness Tracker</h1>
+
+    <!-- Add Workout Form -->
+    <form action="/workouts" method="post">
+        <input type="text" name="workout" placeholder="Workout name" required>
+        <input type="number" name="duration" placeholder="Duration (mins)" required>
+        <button type="submit">➕ Add Workout</button>
+    </form>
+
+    <!-- Search Workout -->
+    <form action="/search" method="get">
+        <input type="text" name="name" placeholder="Search workouts">
+        <button type="submit">🔍 Search</button>
+    </form>
+
+    <!-- Workouts Table -->
+    <h2>Workout List</h2>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Workout</th>
+            <th>Duration (mins)</th>
+            <th>Update</th>
+        </tr>
+        {% for workout in workouts %}
+        <tr>
+            <!-- fixed: use loop.index0 (number) -->
+            <td>{{ loop.index0 }}</td>
+            <td>{{ workout.workout }}</td>
+            <td>{{ workout.duration }}</td>
+            <td>
+                <form action="/workouts/{{ loop.index0 }}" method="post">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="text" name="workout" placeholder="New name" required>
+                    <input type="number" name="duration" placeholder="New duration" required>
+                    <button type="submit">✏️ Update</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <h3>📊 Stats</h3>
+        <p><b>Total Workouts:</b> {{ stats.count }}</p>
+        <p><b>Total Duration:</b> {{ stats.total_duration }} mins</p>
+        <p><b>Average Duration:</b> {{ stats.average_duration }} mins</p>
+        {% if stats.longest %}
+        <p><b>Longest Workout:</b> {{ stats.longest.workout }} ({{ stats.longest.duration }} mins)</p>
+        {% endif %}
+        {% if stats.shortest %}
+        <p><b>Shortest Workout:</b> {{ stats.shortest.workout }} ({{ stats.shortest.duration }} mins)</p>
+        {% endif %}
+    </div>
+</body>
+</html>
