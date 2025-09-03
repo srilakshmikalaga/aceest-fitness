@@ -38,8 +38,8 @@ It demonstrates modern DevOps practices including:
 │ └── workflows
 │  └── ci.yml # GitHub Actions CI/CD pipeline
 ├── app
-│ ├── init.py # Flask app with routes & logic
-│ ├── main.py # Entry point when using python -m app
+│ ├── __init__.py # Flask app with routes & logic
+│ ├── __main__.py # Entry point when using python -m app
 │ └── templates
 │  └── index.html # UI for workouts
 ├── tests
