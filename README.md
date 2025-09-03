@@ -43,7 +43,7 @@ It demonstrates modern DevOps practices including:
 │ └── templates
 │  └── index.html # UI for workouts
 ├── tests
-│ └── test_app.py # Unit test cases (≈25 tests)
+│ └── test_app.py # Unit test cases (≈16 tests)
 ├── .gitignore
 ├── conftest.py # Pytest fixtures (e.g., test client)
 ├── Dockerfile # Docker container configuration
